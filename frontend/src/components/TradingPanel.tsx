@@ -7,7 +7,7 @@ import { PublicKey, SystemProgram } from '@solana/web3.js';
 import idl from '../idl.json';
 import './TradingPanel.css';
 
-const PROGRAM_ID = new PublicKey('2GJwMvS6ewfK8TytLXzonbmbendP3oAsoBA7c4px5e9d');
+const PROGRAM_ID = new PublicKey('7bmPzyNe65Br7yR83KaewmatgrACQLwnaa4UzFjsVV3P');
 
 export const TradingPanel: React.FC = () => {
     const { connection } = useConnection();
@@ -31,7 +31,7 @@ export const TradingPanel: React.FC = () => {
             const provider = new AnchorProvider(
                 connection,
                 wallet as any,
-                { commitment: 'confirmed' }
+                { commitment: 'processed' }
             );
 
             const program = new Program(idl as any, provider);

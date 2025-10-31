@@ -37,27 +37,6 @@ export class CrankService {
             const nextBatchId = auctionState.batchCounter.toNumber() + 1;
 
             try {
-                const initAndDelegateTx = await this.solanaService.program.methods
-                    .initializeResult(new BN(nextBatchId))
-                    .accounts({
-                        result: this.solanaService.getResultPDA(nextBatchId),
-                        payer: config.crankKeypair.publicKey,
-                        systemProgram: SystemProgram.programId
-                    })
-                    .postInstructions([
-                        await this.solanaService.program.methods
-                            .delegateResult(new BN(nextBatchId))
-                            .accounts({
-                                payer: config.crankKeypair.publicKey,
-                                pda: this.solanaService.getResultPDA(nextBatchId)
-                            })
-                            .instruction()
-                    ])
-                    .signers([config.crankKeypair])
-                    .rpc();
-
-                console.log(`Result PDA initialized and delegated for batch ${nextBatchId}: `, initAndDelegateTx);
-
                 const tx = await this.solanaService.program.methods
                     .executeBatch(new BN(nextBatchId))
                     .accounts({
@@ -65,7 +44,8 @@ export class CrankService {
                         bidQueue: this.solanaService.bidQueuePDA,
                         askQueue: this.solanaService.askQueuePDA,
                         result: this.solanaService.getResultPDA(nextBatchId),
-                        authority: config.crankKeypair.publicKey
+                        authority: config.crankKeypair.publicKey,
+                        systemProgram: SystemProgram.programId
                     })
                     .signers([config.crankKeypair])
                     .rpc();
@@ -83,6 +63,7 @@ export class CrankService {
                     askVolume: result.askVolume.toNumber()
                 });
             } catch (err: any) {
+                console.log("Error with exec batch: ", err);
                 // TooEarlyToExecute error (6000) is expected when batch interval hasn't elapsed
                 if (err?.error?.errorCode?.code === 'TooEarlyToExecute') {
                     // Silently ignore - this is normal when checking too frequently

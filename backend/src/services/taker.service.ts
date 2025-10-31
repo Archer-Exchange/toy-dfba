@@ -37,7 +37,7 @@ export class TakerService {
 
         const orders = [];
 
-        const numTakerOrdersPerSide = 3 + Math.floor(Math.random() * 3);
+        const numTakerOrdersPerSide = 3;
 
         for (let i = 0; i < numTakerOrdersPerSide; i++) {
             const takerPrice = currentMid * (1 + this.spread * (1 + Math.random() * 0.5));

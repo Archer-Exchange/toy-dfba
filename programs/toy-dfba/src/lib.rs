@@ -9,7 +9,7 @@ use instructions::*;
 use ephemeral_rollups_sdk::anchor::{ephemeral, delegate};
 use ephemeral_rollups_sdk::cpi::DelegateConfig;
 
-declare_id!("2GJwMvS6ewfK8TytLXzonbmbendP3oAsoBA7c4px5e9d");
+declare_id!("7bmPzyNe65Br7yR83KaewmatgrACQLwnaa4UzFjsVV3P");
 
 #[ephemeral]
 #[program]

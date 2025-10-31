@@ -6,7 +6,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-toy_dfba = "2GJwMvS6ewfK8TytLXzonbmbendP3oAsoBA7c4px5e9d"
+toy_dfba = "7bmPzyNe65Br7yR83KaewmatgrACQLwnaa4UzFjsVV3P"
 
 [registry]
 url = "https://api.apr.dev"

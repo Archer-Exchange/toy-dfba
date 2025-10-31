@@ -541,7 +541,7 @@ Located in `backend/src/config/index.ts`:
 {
   port: 3001,                                      // API server port
   rpcUrl: "https://api.devnet.solana.com",        // Solana RPC endpoint
-  programId: "2GJwMvS6ewfK8TytLXzonbmbendP3oAsoBA7c4px5e9d",
+  programId: "7bmPzyNe65Br7yR83KaewmatgrACQLwnaa4UzFjsVV3P",
   batchInterval: 100,                             // 100ms between batches
 }
 ```

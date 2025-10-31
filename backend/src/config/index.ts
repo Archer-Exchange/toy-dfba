@@ -12,9 +12,9 @@ const loadKeypair = (path: string): Keypair => {
 export const config = {
     port: process.env.PORT || 3001,
     rpcUrl: process.env.RPC_URL || `https://devnet-router.magicblock.app/`,
-    programId: process.env.PROGRAM_ID || '2GJwMvS6ewfK8TytLXzonbmbendP3oAsoBA7c4px5e9d',
+    programId: process.env.PROGRAM_ID || '7bmPzyNe65Br7yR83KaewmatgrACQLwnaa4UzFjsVV3P',
     makerKeypair: loadKeypair(process.env.MAKER_KEYPAIR_PATH || './src/config/maker-keypair.json'),
     takerKeypair: loadKeypair(process.env.TAKER_KEYPAIR_PATH || './src/config/taker-keypair.json'),
     crankKeypair: loadKeypair(process.env.CRANK_KEYPAIR_PATH || './src/config/crank-keypair.json'),
-    batchInterval: 400,
+    batchInterval: 2000,
 }
