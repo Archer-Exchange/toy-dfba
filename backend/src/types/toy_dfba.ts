@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/toy_dfba.json`.
  */
 export type ToyDfba = {
-  "address": "9cuBmqXbLefpwP6Kc6ManHz6ZJYszCKoYvPnMvZ7Jcpf",
+  "address": "GA1dpF2Q72aWVYtwzWqL6uYoV3nbDa7U5DPmJwuvFiQF",
   "metadata": {
     "name": "toyDfba",
     "version": "0.1.0",

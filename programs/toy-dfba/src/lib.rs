@@ -7,7 +7,7 @@ pub mod state;
 
 use instructions::*;
 
-declare_id!("9cuBmqXbLefpwP6Kc6ManHz6ZJYszCKoYvPnMvZ7Jcpf");
+declare_id!("GA1dpF2Q72aWVYtwzWqL6uYoV3nbDa7U5DPmJwuvFiQF");
 
 #[program]
 pub mod toy_dfba {
