@@ -17,6 +17,10 @@
     color: #888;
 }
 
+.asks, .bids {
+    min-height: 380px;
+}
+
 .order-book-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -31,10 +35,39 @@
     grid-template-columns: 1fr 1fr 1fr;
     padding: 8px 10px;
     transition: background-color 0.2s;
+    position: relative;
+    overflow: hidden;
+    min-height: 32px;
 }
 
 .order-row:hover {
     background-color: #2a2a2a;
+}
+
+.order-row.empty {
+    opacity: 0.3;
+}
+
+.order-row span {
+    position: relative;
+    z-index: 1;
+}
+
+.depth-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    transition: width 0.3s ease;
+    z-index: 0;
+}
+
+.depth-bar.ask {
+    background-color: rgba(255, 68, 68, 0.15);
+}
+
+.depth-bar.bid {
+    background-color: rgba(68, 255, 68, 0.15);
 }
 
 .order-row.ask .price {

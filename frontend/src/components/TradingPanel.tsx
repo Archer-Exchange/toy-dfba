@@ -4,6 +4,7 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { Program, AnchorProvider, BN } from '@coral-xyz/anchor';
 import { PublicKey, SystemProgram } from '@solana/web3.js';
+import toast from 'react-hot-toast';
 import idl from '../idl.json';
 import './TradingPanel.css';
 
@@ -20,7 +21,7 @@ export const TradingPanel: React.FC = () => {
 
     const submitOrder = async () => {
         if (!wallet.publicKey || !wallet.signTransaction) {
-            setStatus('Please connect your wallet');
+            toast.error('Please connect your wallet');
             return;
         }
 
@@ -31,7 +32,10 @@ export const TradingPanel: React.FC = () => {
             const provider = new AnchorProvider(
                 connection,
                 wallet as any,
-                { commitment: 'confirmed' }
+                {
+                    commitment: 'processed',
+                    skipPreflight: true
+                }
             );
 
             const program = new Program(idl as any, provider);
@@ -41,12 +45,12 @@ export const TradingPanel: React.FC = () => {
                 [Buffer.from('auction_state')],
                 program.programId
             );
-            
+
             const [bidQueuePDA] = PublicKey.findProgramAddressSync(
                 [Buffer.from('bid_queue')],
                 program.programId
             );
-            
+
             const [askQueuePDA] = PublicKey.findProgramAddressSync(
                 [Buffer.from('ask_queue')],
                 program.programId
@@ -68,12 +72,42 @@ export const TradingPanel: React.FC = () => {
                 })
                 .rpc();
 
-            setStatus(`Order placed! Transaction: ${tx.substring(0, 8)}...`);
+            const explorerUrl = `https://explorer.solana.com/tx/${tx}?cluster=devnet`;
+
+            toast.success(
+                <div>
+                    Order placed successfully!
+                    <br />
+                    <a
+                        href={explorerUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#00ff00', textDecoration: 'underline' }}
+                    >
+                        View on Explorer
+                    </a>
+                </div>,
+                {
+                    duration: 6000,
+                    style: {
+                        background: '#10b981',
+                        color: '#fff',
+                    },
+                }
+            );
+
+            setStatus('');
             setPrice('');
             setQuantity('');
         } catch (error: any) {
             console.error('Failed to place order:', error);
-            setStatus(`Error: ${error.message}`);
+            toast.error(
+                `Failed to place order: ${error.message || 'Unknown error'}`,
+                {
+                    duration: 6000,
+                }
+            );
+            setStatus('');
         } finally {
             setLoading(false);
         }

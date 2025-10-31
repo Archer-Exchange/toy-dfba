@@ -14,7 +14,7 @@ export class SolanaService {
     askQueuePDA: PublicKey;
 
     constructor() {
-        this.connection = new Connection(config.rpcUrl, 'confirmed');
+        this.connection = new Connection(config.rpcUrl, 'processed');
     }
 
     async initialize() {
